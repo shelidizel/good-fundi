@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:good_fundi/Home/widgets/custom_services.dart';
 import 'package:good_fundi/Home/widgets/fundi_services.dart';
 import 'package:good_fundi/Home/widgets/home_header.dart';
 import 'package:good_fundi/Home/widgets/propert_sell.dart';
@@ -10,11 +11,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         HomeHeader(),
         SellPropertBanner(),
         FundiServicesList(),
+        CustomServices(),
         PropertySellWidget()
         
       ],

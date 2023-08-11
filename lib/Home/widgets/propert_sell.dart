@@ -33,18 +33,43 @@ class _PropertySellWidgetState extends State<PropertySellWidget> {
   ];
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 250,
-      width: MediaQuery.of(context).size.width,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index){
-          return propertySellItem(
-            properties[index].image,
-            properties[index].name,
-            properties[index].price,
-            );
-        }),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Property Listings',
+                  style: GoodFundiTextStyles.subTitle,
+                  ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.grey,
+                  size: 20,
+                )
+              ],
+            ),
+        ),
+        SizedBox(
+          height: 264,
+          width: MediaQuery.of(context).size.width,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: properties.length,
+            itemBuilder: (context, index){
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: propertySellItem(
+                  properties[index].image,
+                  properties[index].name,
+                  properties[index].price,
+                  ),
+              );
+            }),
+        ),
+      ],
     );
   }
 }
@@ -54,7 +79,6 @@ Widget propertySellItem(
   String name, 
   String price) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           height: 200,
@@ -63,37 +87,46 @@ Widget propertySellItem(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(
+              fit: BoxFit.cover,
               image: AssetImage(image))
           ),
           
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        SizedBox(
+          width: 300,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal : 12.0,
+              vertical: 4),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
               children: [
-                Text(
-                  name,
-                  style: GoodFundiTextStyles
-                  .subTitle,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name, 
+                      style: GoodFundiTextStyles.subTitle,
+                    ),
+                    Text(
+                      price, 
+                      style: GoodFundiTextStyles
+                      .subTitle
+                      .copyWith(
+                        color: Colors.grey.shade600
+                      ),
+                    )
+                  ],
                 ),
-                Text(
-                  price,
-                  style: GoodFundiTextStyles
-                  .subTitle
-                  .copyWith(
-                    color: Colors.grey.shade600
-                  ),
+                const Icon(
+                  Icons.verified,
+                  color: Colors.deepOrange,
+                  size: 20.0,
                 )
               ],
             ),
-
-            Icon(
-              Icons.verified,
-              color: Colors.deepOrange,
-              size: 20,)
-          ],
+          ),
         )
 
       ],
